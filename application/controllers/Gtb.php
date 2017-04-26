@@ -6,6 +6,7 @@
  * Date: 26/04/2017
  * Time: 23.17
  * @property  session
+ * @property  input
  */
 class Gtb extends CI_Controller
 {
@@ -22,4 +23,11 @@ class Gtb extends CI_Controller
             $this->load->view('user/login');
     }
 
+    public function login(){
+        if(isset($_POST['submit'])){
+
+        }else{
+            $this->load->view('user/login');
+        }
+    }
 }
