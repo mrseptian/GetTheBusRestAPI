@@ -25,7 +25,19 @@ class Gtb extends CI_Controller
 
     public function login(){
         if(isset($_POST['submit'])){
-
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $mod = new mGtb();
+            $where = array(
+                'username' => $username,
+                'password' => $password
+            );
+            $row = $mod->get_whereData('admin', $where)->num_rows();
+            if($row > 0){
+                $this->load->view('welcome_message');
+            }else{
+                $this->load->view('user/login');
+            }
         }else{
             $this->load->view('user/login');
         }
