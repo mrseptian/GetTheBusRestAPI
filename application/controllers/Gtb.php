@@ -16,9 +16,9 @@ class Gtb extends CI_Controller
     }
 
     public function index(){
-        $login = $this->session->userdata('login');
+        $login = $this->session->userdata('status');
         if($login)
-            $this->load->view('home');
+            $this->load->view('user/dashboard');
         else
             $this->load->view('user/login');
     }
@@ -32,9 +32,16 @@ class Gtb extends CI_Controller
                 'username' => $username,
                 'password' => $password
             );
-            $row = $mod->get_whereData('admin', $where)->num_rows();
-            if($row > 0){
-                $this->load->view('welcome_message');
+            $rs = $mod->get_whereData('admin', $where);
+            $rowcount = $rs->num_rows();
+            if($rowcount > 0){
+                $row = $rs->row();
+                $usdata = array(
+                    'row' => $row,
+                    'status' => TRUE
+                );
+                $this->session->set_userdata($usdata);
+                $this->index();
             }else{
                 $this->load->view('user/login');
             }
