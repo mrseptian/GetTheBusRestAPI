@@ -6,6 +6,7 @@
  * Date: 28/04/2017
  * Time: 14.06
  */
+ //admin
 class SuperAdmin extends Gtb
 {
     public function __construct()
